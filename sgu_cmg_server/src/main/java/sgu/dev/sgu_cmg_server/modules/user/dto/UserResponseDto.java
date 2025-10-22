@@ -1,5 +1,6 @@
 package sgu.dev.sgu_cmg_server.modules.user.dto;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 import lombok.AllArgsConstructor;
@@ -17,4 +18,5 @@ public class UserResponseDto {
     private String fullName;
     private String email;
     private String phone;
+    private LocalDate createdAt;
 }

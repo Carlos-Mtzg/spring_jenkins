@@ -31,6 +31,7 @@ public class UserService {
                         .fullName(user.getFullName())
                         .email(user.getEmail())
                         .phone(user.getPhone())
+                        .createdAt(user.getCreatedAt())
                         .build())
                 .toList();
         return Utilities.generateResponse(HttpStatus.OK, "Consulta exitosa", userResponse);
