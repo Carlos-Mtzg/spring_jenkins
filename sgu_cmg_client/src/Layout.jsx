@@ -29,6 +29,32 @@ function Layout() {
     fetchUsers();
   }, []);
 
+  const handleDelete = async (user) => {
+    const result = await Swal.fire({
+      title: `¿Desea eliminar al usuario ${user.fullName}?`,
+      text: "Esta acción no se puede deshacer",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Si, eliminar",
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#444646",
+      reverseButtons: true,
+    });
+
+    if (result.isConfirmed) {
+      const id = user.uuid ?? user.id;
+      toast.promise(deleteUser(id), {
+        loading: "Eliminando usuario...",
+        success: () => {
+          fetchUsers();
+          return `El usuario ${user.fullName} se eliminó con éxito`;
+        },
+        error: () => "Ocurrió un error al eliminar el usuario",
+      });
+    }
+  };
+
   return (
     <>
       <Toaster position="top-center" expand={false} richColors closeButton />
@@ -101,6 +127,7 @@ function Layout() {
                             Editar
                           </button>
                           <button
+                            onClick={() => handleDelete(u)}
                             className="inline-flex items-center px-3 py-1 bg-red-50 text-red-600 text-sm rounded-md border border-red-100 hover:bg-red-100 transition cursor-pointer"
                             aria-label={`Eliminar ${u.fullName}`}
                           >
