@@ -1,5 +1,7 @@
 package sgu.dev.sgu_cmg_server.modules.user.dto;
 
+import java.util.UUID;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserResponseDto {
 
+    private UUID uuid;
     private String fullName;
     private String email;
     private String phone;

@@ -27,6 +27,7 @@ public class UserService {
         List<UserModel> users = userRepository.findAll();
         List<UserResponseDto> userResponse = users.stream()
                 .map(user -> UserResponseDto.builder()
+                        .uuid(user.getUuid())
                         .fullName(user.getFullName())
                         .email(user.getEmail())
                         .phone(user.getPhone())
@@ -43,6 +44,7 @@ public class UserService {
         }
         UserModel user = userOpt.get();
         UserResponseDto userResponse = UserResponseDto.builder()
+                .uuid(user.getUuid())
                 .fullName(user.getFullName())
                 .email(user.getEmail())
                 .phone(user.getPhone())
