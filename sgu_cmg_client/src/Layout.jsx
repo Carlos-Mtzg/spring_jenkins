@@ -8,11 +8,16 @@ import {
 } from "@heroicons/react/24/outline";
 import { toast, Toaster } from "sonner";
 import CreateUserModal from "@components/CreateUserModal";
+import UpdateUserModal from "@components/UpdateUserModal";
 import Swal from "sweetalert2";
 
 function Layout() {
   const [users, setUsers] = useState([]);
   const [showCreateModal, setShowCreateModal] = useState(false);
+
+  // nuevo estado para editar
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
 
   const fetchUsers = async () => {
     try {
@@ -51,6 +56,11 @@ function Layout() {
         error: () => "Ocurrió un error al eliminar el usuario",
       });
     }
+  };
+
+  const openEdit = (user) => {
+    setSelectedUser(user);
+    setShowUpdateModal(true);
   };
 
   return (
@@ -127,6 +137,7 @@ function Layout() {
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm">
                         <div className="inline-flex gap-2">
                           <button
+                            onClick={() => openEdit(u)}
                             className="flex items-center p-2 bg-blue-50 border border-gray-200 rounded-lg text-sm transition duration-300 cursor-pointer hover:bg-blue-100"
                             aria-label={`Editar ${u.fullName}`}
                           >
@@ -155,6 +166,20 @@ function Layout() {
         onClose={() => setShowCreateModal(false)}
         onSuccess={() => {
           setShowCreateModal(false);
+          fetchUsers();
+        }}
+      />
+
+      <UpdateUserModal
+        open={showUpdateModal}
+        user={selectedUser}
+        onClose={() => {
+          setShowUpdateModal(false);
+          setSelectedUser(null);
+        }}
+        onSuccess={() => {
+          setShowUpdateModal(false);
+          setSelectedUser(null);
           fetchUsers();
         }}
       />
