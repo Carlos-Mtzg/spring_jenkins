@@ -13,12 +13,10 @@ COPY . .
 # Desde el Docker Compose
 ARG API_HOST
 ARG API_PORT
-ARG API_BASE
 
 # Para reemplazar en el .env del proyecto
 ENV VITE_API_HOST=$API_HOST
 ENV VITE_API_PORT=$API_PORT
-ENV VITE_API_BASE=$API_BASE
 
 RUN pnpm run build
 

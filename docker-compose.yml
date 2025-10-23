@@ -20,7 +20,6 @@ services:
       args:
         API_HOST: localhost
         API_PORT: 8081
-        API_BASE: /sgu
     container_name: adj-client
     ports:
       - "3000:80"
