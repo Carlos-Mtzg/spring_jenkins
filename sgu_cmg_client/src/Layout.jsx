@@ -15,7 +15,6 @@ function Layout() {
   const [users, setUsers] = useState([]);
   const [showCreateModal, setShowCreateModal] = useState(false);
 
-  // nuevo estado para editar
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
 
